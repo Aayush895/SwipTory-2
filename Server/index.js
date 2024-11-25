@@ -5,7 +5,8 @@ import morgan from "morgan";
 import loggerConfig from "./src/config/loggerConfig.js";
 import connectDB from "./src/config/dbConfig.js";
 import { PORT } from "./src/config/serverConfig.js";
-import apiRouter from "./src/routes/apiRoute.js"
+import apiRouter from "./src/routes/apiRoute.js";
+import errorMiddleware from "./src/middlewares/errorMiddleware.js";
 
 const app = express();
 const morganFormat = ":method :url :status :response-time ms";
@@ -32,8 +33,8 @@ app.use(
 
 // Health-check route
 // /api/v1/healthcheck
-app.use('/api', apiRouter)
-
+app.use("/api", apiRouter);
+app.use(errorMiddleware);
 app.listen(PORT, async () => {
   try {
     await connectDB();
