@@ -31,10 +31,9 @@ app.use(
   })
 );
 
-// Health-check route
-// /api/v1/healthcheck
 app.use("/api", apiRouter);
 app.use(errorMiddleware);
+
 app.listen(PORT, async () => {
   try {
     await connectDB();
